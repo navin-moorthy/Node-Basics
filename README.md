@@ -1,6 +1,6 @@
-# NodeJS Training
+# NodeJS-L1_Training
 
-This project is the home for my basics NodeJS Training.
+This project is the home for my basics NodeJS L1 Training.
 
 ## Table of contents
 
@@ -43,10 +43,13 @@ This project is the home for my basics NodeJS Training.
     - [Process-utility](#process-utility)
     - [OS-utilities](#os-utilities)
     - [Path-utility](#path-utility)
+    - [Net Module](#net-module-utility)
     - [DNS-module](#dns-module)
     - [Domain-module](#domain-module)
 
-- #### [http Module](#simple-http-module-to-test-http-server)
+- #### [http Module](#http-module-1)
+    - [Simple-http-setup](#simple-http-setup)
+    - [Detailed-http-server-and-client-setup](#detailed-http-server-and-client-setup)
 
 
 ## Notes taken during the training for future use.
@@ -174,6 +177,7 @@ File Read Ended
 If you have the passion and desire to learn,
 success will follow you all the time.
 ```
+[Back to TOC](#table-of-contents)
 
 ### Subcription and Publish Method - Event Emitter
 #### Example 1
@@ -268,24 +272,7 @@ listner2 executed.
 1 Listner(s) listening to connection event
 Program Ended.
 ```
-
-
-### Simple http module to test http server
-**Code**
-```js
-const http = require('http');
-const port = process.env.PORT;
-http.createServer(function(req, res){
-    res.writeHead(200, {'Content-Type': "text/plain"});
-    res.end("Hello World");
-}).listen(port);
-
-console.log("Server is running at " + port);
-```
-**Output**
-```console
-Hello World
-```
+[Back to TOC](#table-of-contents)
 
 ### Buffers
 #### Create a buffer variable using buf.write
@@ -398,6 +385,8 @@ console.log(buffer7.toString());
 ```console
 Simply Ea
 ```
+[Back to TOC](#table-of-contents)
+
 ### Streams
 #### Create Read Stream
 **Code**
@@ -513,6 +502,7 @@ console.log("File Decompressed");
 ```console
 File Decompressed
 ```
+[Back to TOC](#table-of-contents)
 
 ### File System
 #### Finding the File Stats
@@ -679,6 +669,7 @@ Files inside a directory ./test was read
 Going to delete the directory ./test/tmp
 Deleted the directory ./test/tmp
 ```
+[Back to TOC](#table-of-contents)
 
 ### Global Objects
 #### Basic objects
@@ -1031,6 +1022,115 @@ Emitted 'error' event at:
     [... lines matching original stack trace ...]
     at bootstrapNodeJSCore (internal/bootstrap/node.js:743:3)
 ```
+[Back to TOC](#table-of-contents)
+
+### http module
+#### Simple http setup
+**Code**
+```js
+const http = require('http');
+const port = process.env.PORT;
+http.createServer(function(req, res){
+    res.writeHead(200, {'Content-Type': "text/plain"});
+    res.end("Hello World");
+}).listen(port);
+
+console.log("Server is running at " + port);
+```
+**Output**
+```console
+Hello World
+```
+
+#### Detailed http server and client setup
+##### server.js
+**Code**
+```js
+const http = require('http');
+const fs = require('fs');
+const url = require('url');
+
+// Create a server
+http.createServer((req, res) => {
+
+   // Parse the request containing file name
+    var pathname = url.parse(req.url).pathname;
+
+    // Print the name of the file for which request is made.
+    console.log("Request for " + pathname + " received.");
+
+    // Read the requested file content from file system
+    fs.readFile(pathname.substr(1), (err, data) => {
+        if(err) {
+            console.log(err);
+            
+            // HTTP Status: 404 : NOT FOUND
+            // Content Type: text/plain
+            res.writeHead(404, { 'Content-Type': 'text/html' });
+        } else {
+            //Page found	  
+            // HTTP Status: 200 : OK
+            // Content Type: text/plain
+            res.writeHead(200, { 'Content-Type': 'text/html' });
+            // Write the content of the file to response body
+            res.write(data.toString());
+        }
+        // Send the response body 
+        res.end();
+    });
+}).listen(process.env.PORT, process.env.IP);
+
+// Console will print the message
+console.log("Server is running at local host");
+```
+**Output**
+```console
+$ node server.js 
+Server is running at local host
+Request for /index.htm received.
+```
+##### client.js
+**Code**
+```js
+const http = require('http');
+
+// Options to be used by request 
+var options = {
+   host: process.env.IP,
+   port: process.env.PORT,
+   path: '/index.htm'  
+};
+
+// Callback function is used to deal with response
+var callback = (response) => {
+   // Continuously update stream with data
+   var body = '';
+   response.on('data', (data) => {
+      body += data;
+   });
+   
+   response.on('end', () => {
+      // Data received completely.
+      console.log(body);
+   });
+};
+// Make a request to the server
+var req = http.request(options, callback);
+req.end();
+```
+**Output**
+```console
+$ node client.js 
+<html>
+    <head>
+        <title>Sample Page</title>
+    </head>
+    <body>
+        <h1>Hello World</h1>
+    </body>
+</html>
+```
+[Back to TOC](#table-of-contents)
 
 <!--
 ## TEMPLATE

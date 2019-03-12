@@ -1,6 +1,6 @@
-# NodeJS-L1_Training
+# NodeJS Training
 
-This project is the home for my basics NodeJS L1 Training.
+This project is the home for my basics NodeJS Training.
 
 ## Table of contents
 

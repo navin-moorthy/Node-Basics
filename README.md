@@ -893,14 +893,6 @@ resolve : /home/ubuntu/workspace/Node Learnings/app.js
 ext name : .js
 ```
 
-####
-**Code**
-```js
-```
-**Output**
-```console
-```
-
 #### Net Module Utility
 ##### Server code
 **Code**

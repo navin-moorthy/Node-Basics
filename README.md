@@ -1132,6 +1132,88 @@ $ node client.js
 ```
 [Back to TOC](#table-of-contents)
 
+### Express
+#### Demo Basic App
+**Code**
+```js
+const express = require("express");
+const app = express();
+
+app.use('/', (req, res) => {
+    res.send("<h1> Hello World <h1>");
+});
+
+var server = app.listen(process.env.PORT, process.env.IP, () => {
+    var host = server.address().address;
+    var port = server.address().port;
+    console.log("Example app listening at https://%s:%s", host, port);
+});
+```
+**Output**
+```console
+$ node index.js 
+Example app listening at https://0.0.0.0:8080
+```
+<p align="center">
+<kbd><img src="Images/13-03-2019-Express-Basic-WebApp.PNG"></kbd>
+</p>
+
+#### GET input through Form
+**Code**
+##### index.js
+```js
+const express = require("express");
+
+const app = express();
+
+app.use(express.static('public'));
+
+app.get("/index.htm", (req, res) => {
+    res.sendFile(__dirname + "/" + "index.htm");
+});
+
+app.get("/process_get", (req, res) => {
+    var response = {
+        first_name: req.query.first_name,
+        last_name: req.query.last_name
+    };
+    console.log(response);
+    res.send(response);
+});
+
+var server = app.listen(process.env.PORT, process.env.IP, () => {
+    var host = server.address().address;
+    var port = server.address().port;
+    console.log("Example app listening at https://%s:%s", host, port);
+});
+```
+##### index.htm
+```html
+<html>
+    <body>
+        <form action="/process_get" method="GET">
+            First Name: <input type="text" name="first_name"/> <br>
+            Last Name: <input type="text" name="last_name"/> <br> <br>
+            <input type="submit" value="Submit"/>
+        </form>
+    </body>
+</html>
+```
+**Output**
+```console
+[nodemon] starting `node index.js`
+Example app listening at https://0.0.0.0:8080
+{ first_name: 'Navin', last_name: 'Navi' }
+```
+##### Index Form
+<p align="center">
+<kbd><img src="Images/13-03-2019-Express-Basic-WebApp-GetForm.PNG"></kbd>
+</p>
+##### Form Response
+<p align="center">
+<kbd><img src="Images/13-03-2019-Express-Basic-WebApp-GetForm-Response.PNG"></kbd>
+</p>
+
 <!--
 ## TEMPLATE
 ### 

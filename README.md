@@ -1,6 +1,6 @@
-# NodeJS-Training
+# NodeJS-L1_Training
 
-This project is the home for my basics NodeJS Training.
+This project is the home for my basics NodeJS L1 Training.
 
 ## Table of contents
 
@@ -51,6 +51,22 @@ This project is the home for my basics NodeJS Training.
     - [Simple-http-setup](#simple-http-setup)
     - [Detailed-http-server-and-client-setup](#detailed-http-server-and-client-setup)
 
+- #### [Express](#express)
+    - [Basic Express App](#demo-basic-app)
+    - [GET Form Data](#get-input-through-form)
+    - [POST Form Data](#post-input-through-form)
+    - [File Upload-Multer](#file-upload-using-multer)
+
+- #### [REST](#restful-api)
+    - [GET](#get-user-data)
+    - [POST](#post-user-data)
+    - [SHOW&UPDATE](#show-user)
+    - [DELETE](#delete-request)
+
+- #### [Child Process](#child-process)
+    - [exec()](#childprocessexec)
+    - [spawn()](#childprocessspawn)
+    - [fork()](#childprocessfork)
 
 ## Notes taken during the training for future use.
 
@@ -177,7 +193,7 @@ File Read Ended
 If you have the passion and desire to learn,
 success will follow you all the time.
 ```
-[Back to TOC](#table-of-contents)
+**[Back to TOC](#table-of-contents)**
 
 ### Subcription and Publish Method - Event Emitter
 #### Example 1
@@ -272,7 +288,7 @@ listner2 executed.
 1 Listner(s) listening to connection event
 Program Ended.
 ```
-[Back to TOC](#table-of-contents)
+**[Back to TOC](#table-of-contents)**
 
 ### Buffers
 #### Create a buffer variable using buf.write
@@ -385,7 +401,7 @@ console.log(buffer7.toString());
 ```console
 Simply Ea
 ```
-[Back to TOC](#table-of-contents)
+**[Back to TOC](#table-of-contents)**
 
 ### Streams
 #### Create Read Stream
@@ -502,7 +518,7 @@ console.log("File Decompressed");
 ```console
 File Decompressed
 ```
-[Back to TOC](#table-of-contents)
+**[Back to TOC](#table-of-contents)**
 
 ### File System
 #### Finding the File Stats
@@ -669,7 +685,7 @@ Files inside a directory ./test was read
 Going to delete the directory ./test/tmp
 Deleted the directory ./test/tmp
 ```
-[Back to TOC](#table-of-contents)
+**[Back to TOC](#table-of-contents)**
 
 ### Global Objects
 #### Basic objects
@@ -1022,7 +1038,7 @@ Emitted 'error' event at:
     [... lines matching original stack trace ...]
     at bootstrapNodeJSCore (internal/bootstrap/node.js:743:3)
 ```
-[Back to TOC](#table-of-contents)
+**[Back to TOC](#table-of-contents)**
 
 ### http module
 #### Simple http setup
@@ -1130,7 +1146,7 @@ $ node client.js
     </body>
 </html>
 ```
-[Back to TOC](#table-of-contents)
+**[Back to TOC](#table-of-contents)**
 
 ### Express
 #### Demo Basic App
@@ -1205,24 +1221,566 @@ var server = app.listen(process.env.PORT, process.env.IP, () => {
 Example app listening at https://0.0.0.0:8080
 { first_name: 'Navin', last_name: 'Navi' }
 ```
-##### Index Form
+##### Request
 <p align="center">
 <kbd><img src="Images/13-03-2019-Express-Basic-WebApp-GetForm.PNG"></kbd>
 </p>
-
-##### Form Response
+##### Response
 <p align="center">
 <kbd><img src="Images/13-03-2019-Express-Basic-WebApp-GetForm-Response.PNG"></kbd>
 </p>
 
-<!--
-## TEMPLATE
-### 
-####
+#### POST input through Form
 **Code**
+##### index.js
 ```js
+const express = require("express");
+const bodyParser = require("body-parser");
+
+const app = express();
+
+app.use(express.static('public'));
+app.use(bodyParser.urlencoded({ extended: true}));
+
+app.get("/index.htm", (req, res) => {
+    res.sendFile(__dirname + "/" + "index.htm");
+});
+
+app.post("/process_post", (req, res) => {
+    var response = {
+        first_name: req.body.first_name,
+        last_name: req.body.last_name
+    };
+    console.log(response);
+    res.send(response);
+});
+
+var server = app.listen(process.env.PORT, process.env.IP, () => {
+    var host = server.address().address;
+    var port = server.address().port;
+    console.log("Example app listening at https://%s:%s", host, port);
+});
+```
+##### index.htm
+```html
+<html>
+    <body>
+        <form action="/process_post" method="POST">
+            First Name: <input type="text" name="first_name"/> <br>
+            Last Name: <input type="text" name="last_name"/> <br> <br>
+            <input type="submit" value="Submit"/>
+        </form>
+    </body>
+</html>
 ```
 **Output**
 ```console
+$ node index.js 
+Example app listening at https://0.0.0.0:8080
+{ first_name: 'Post', last_name: 'Update' }
 ```
+##### Request
+<p align="center">
+<kbd><img src="Images/13-03-2019-Express-Basic-WebApp-POSTForm.PNG"></kbd>
+</p>
+##### Response
+<p align="center">
+<kbd><img src="Images/13-03-2019-Express-Basic-WebApp-POSTForm-Response.PNG"></kbd>
+</p>
+
+#### File upload using multer
+**Code**
+##### index.js
+```js
+const express = require("express");
+const bodyParser = require("body-parser");
+const multer = require("multer");
+const fs = require("fs");
+
+const app = express();
+const uploads = multer({ dest: "public/"})
+
+app.use(express.static('public'));
+app.use(bodyParser.urlencoded({ extended: true}));
+
+app.post("/file_upload", uploads.single("file"), (req, res) => {
+    console.log(req.file);
+    var file = __dirname + "/public/" + req.file.originalname;
+    fs.readFile(req.file.path, (err, data) => {
+        if(err) {
+            console.log(err);
+        } else {
+            fs.writeFile(file, data, (err) => {
+                if(err) {
+                    console.log(err);
+                } else {
+                    var response = {
+                        message: "File Uploaded Successfully",
+                        filename: file
+                    };
+                }
+                console.log(response);
+                res.send(response);
+                fs.unlink(req.file.path, (err) => {
+                    if(err) console.log(err);
+                });
+            });
+        }
+            
+    });
+});
+
+var server = app.listen(process.env.PORT, process.env.IP, () => {
+    var host = server.address().address;
+    var port = server.address().port;
+    console.log("Example app listening at https://%s:%s", host, port);
+});
+```
+##### index.htm
+```html
+<html>
+    <title>File Upload Form</title>
+    <body>
+        <h3>File Upload</h3>
+        Select a file to upload <br>
+        
+        <form action="/file_upload" method="POST" enctype="multipart/form-data">
+            <input type="file" name="file" size="50"> 
+            <br>
+            <input type="submit" value="Upload File">
+        </form>
+    </body>
+</html>
+```
+**Output**
+```console
+$ node index.js 
+Example app listening at https://0.0.0.0:8080
+{ fieldname: 'file',
+  originalname: '13-03-2019-Express-Basic-WebApp.PNG',
+  encoding: '7bit',
+  mimetype: 'image/png',
+  destination: 'public/',
+  filename: 'da6d975ab3615612d5ba17a82fa9c8cf',
+  path: 'public/da6d975ab3615612d5ba17a82fa9c8cf',
+  size: 5960 }
+{ message: 'File Uploaded Successfully',
+  filename:
+   '/home/ubuntu/workspace/Node Learnings/public/13-03-2019-Express-Basic-WebApp.PNG' }
+```
+##### Request
+<p align="center">
+<kbd><img src="Images/13-03-2019-Express-Basic-WebApp-FileUpload-Request.PNG"></kbd>
+</p>
+##### Response
+<p align="center">
+<kbd><img src="Images/13-03-2019-Express-Basic-WebApp-FileUpload-Response.PNG"></kbd>
+</p>
+
+**[Back to TOC](#table-of-contents)**
+
+### RESTful API
+#### GET User Data
+**Code**
+```js
+const express = require("express");
+const fs = require("fs");
+
+const app = express();
+
+app.get("/listusers", (req, res) => {
+    fs.readFile(__dirname + "/" + "users.json", 'utf8', (err, data) => {
+        if(err) console.log(err);
+        console.log(data);
+        res.send(data);
+    });
+});
+
+var server = app.listen(process.env.PORT, process.env.IP, () => {
+    var host = server.address().address;
+    var port = server.address().port;
+    console.log("Example app listening at https://%s:%s", host, port);
+});
+```
+##### users.json
+```json
+{
+   "user1" : {
+      "name" : "mahesh",
+      "password" : "password1",
+      "profession" : "teacher",
+      "id": 1
+   },
+   
+   "user2" : {
+      "name" : "suresh",
+      "password" : "password2",
+      "profession" : "librarian",
+      "id": 2
+   },
+   
+   "user3" : {
+      "name" : "ramesh",
+      "password" : "password3",
+      "profession" : "clerk",
+      "id": 3
+   }
+}
+```
+**Output**
+```console
+$ node index.js 
+Example app listening at https://0.0.0.0:8080
+{
+   "user1" : {
+      "name" : "mahesh",
+      "password" : "password1",
+      "profession" : "teacher",
+      "id": 1
+   },
+   
+   "user2" : {
+      "name" : "suresh",
+      "password" : "password2",
+      "profession" : "librarian",
+      "id": 2
+   },
+   
+   "user3" : {
+      "name" : "ramesh",
+      "password" : "password3",
+      "profession" : "clerk",
+      "id": 3
+   }
+}
+```
+##### Response
+<p align="center">
+<kbd><img src="Images/13-03-2019-Express-Basic-RESTfulAPI-ListUsers.PNG"></kbd>
+</p>
+
+#### POST User Data
+**Code**
+```js
+const express = require("express");
+const fs = require("fs");
+
+const app = express();
+
+var user = {
+    "user4" : {
+      "name" : "mohit",
+      "password" : "password4",
+      "profession" : "teacher",
+      "id": 4
+   }
+};
+
+app.post("/addUser", (req, res) => {
+    fs.readFile(__dirname + "/" + "users.json", 'utf8', (err, data) => {
+        if(err) console.log(err);
+        data = JSON.parse(data);
+        data["user4"] = user["user4"];
+        console.log(data);
+        res.send(JSON.stringify(data));
+    });
+});
+
+var server = app.listen(process.env.PORT, process.env.IP, () => {
+    var host = server.address().address;
+    var port = server.address().port;
+    console.log("Example app listening at https://%s:%s", host, port);
+});
+```
+##### POST Request
+```console
+$ http POST https://yelpcamp-navinnavi19.c9users.io/addUser
+HTTP/1.1 200 OK
+X-BACKEND: apps-proxy
+content-length: 316
+content-type: text/html; charset=utf-8
+date: Wed, 13 Mar 2019 14:24:57 GMT
+etag: W/"13c-+vy7D7y9B167zG/Ak/sKd1RKlCk"
+x-powered-by: Express
+
+{"user1":{"name":"mahesh","password":"password1","profession":"teacher","id":1},"user2":{"name":"suresh","password":"password2","profession":"librarian","id":2},"user3":{"name":"ramesh","password":"password3","profession":"clerk","id":3},"user4":{"name":"mohit","password":"password4","profession":"teacher","id":4}}
+```
+
+**Console Log**
+```console
+$ node index.js 
+Example app listening at https://0.0.0.0:8080
+{ user1:
+   { name: 'mahesh',
+     password: 'password1',
+     profession: 'teacher',
+     id: 1 },
+  user2:
+   { name: 'suresh',
+     password: 'password2',
+     profession: 'librarian',
+     id: 2 },
+  user3:
+   { name: 'ramesh',
+     password: 'password3',
+     profession: 'clerk',
+     id: 3 },
+  user4:
+   { name: 'mohit',
+     password: 'password4',
+     profession: 'teacher',
+     id: 4 } }
+```
+##### UPDATED users.json
+```json
+{"user1":{"name":"mahesh","password":"password1","profession":"teacher","id":1},"user2":{"name":"suresh","password":"password2","profession":"librarian","id":2},"user3":{"name":"ramesh","password":"password3","profession":"clerk","id":3},"user4":{"name":"mohit","password":"password4","profession":"teacher","id":4}}
+```
+
+#### SHOW User
+**Code**
+```js
+const express = require("express");
+const fs = require("fs");
+
+const app = express();
+
+app.get("/:id", (req, res) => {
+    fs.readFile(__dirname + "/" + "users.json", 'utf8', (err, data) => {
+        if(err) console.log(err);
+        data = JSON.parse(data);
+        var users = data;
+        var user = users["user" + req.params.id];
+        console.log(user);
+        res.send(JSON.stringify(user));
+    });
+});
+
+var server = app.listen(process.env.PORT, process.env.IP, () => {
+    var host = server.address().address;
+    var port = server.address().port;
+    console.log("Example app listening at https://%s:%s", host, port);
+});
+```
+##### users.json
+```json
+{"user1":{"name":"mahesh","password":"password1","profession":"teacher","id":1},"user2":{"name":"suresh","password":"password2","profession":"librarian","id":2},"user3":{"name":"ramesh","password":"password3","profession":"clerk","id":3},"user4":{"name":"mohit","password":"password4","profession":"teacher","id":4}}
+```
+
+**Console Log**
+```console
+$ node index.js 
+Example app listening at https://0.0.0.0:8080
+{ name: 'mohit',
+  password: 'password4',
+  profession: 'teacher',
+  id: 4 }
+```
+
+##### GET Request
+<p align="center">
+<kbd><img src="Images/13-03-2019-Express-Basic-RESTfulAPI-ShowUser.PNG"></kbd>
+</p>
+
+#### DELETE Request
+**Code**
+```js
+const express = require("express");
+const fs = require("fs");
+
+const app = express();
+
+app.delete("/deleteUser/:id", (req, res) => {
+    fs.readFile(__dirname + "/" + "users.json", 'utf8', (err, data) => {
+        if(err) console.log(err);
+        data = JSON.parse(data);
+        delete data["user" + req.params.id]
+        console.log(data);
+        res.send(JSON.stringify(data));
+    });
+});
+
+var server = app.listen(process.env.PORT, process.env.IP, () => {
+    var host = server.address().address;
+    var port = server.address().port;
+    console.log("Example app listening at https://%s:%s", host, port);
+});
+```
+
+##### users.json
+```json
+{"user1":{"name":"mahesh","password":"password1","profession":"teacher","id":1},"user2":{"name":"suresh","password":"password2","profession":"librarian","id":2},"user3":{"name":"ramesh","password":"password3","profession":"clerk","id":3},"user4":{"name":"mohit","password":"password4","profession":"teacher","id":4}}
+```
+
+##### Request
+```console
+$ http DELETE https://yelpcamp-navinnavi19.c9users.io/deleteUser/4
+HTTP/1.1 200 OK
+X-BACKEND: apps-proxy
+content-length: 238
+content-type: text/html; charset=utf-8
+date: Wed, 13 Mar 2019 15:14:15 GMT
+etag: W/"ee-NDAWYEHx0zJCNAZcRcu2f/VLuZ8"
+x-powered-by: Express
+
+{"user1":{"name":"mahesh","password":"password1","profession":"teacher","id":1},"user2":{"name":"suresh","password":"password2","profession":"librarian","id":2},"user3":{"name":"ramesh","password":"password3","profession":"clerk","id":3}}
+```
+**Console Log**
+```console
+$ node index.js 
+Example app listening at https://0.0.0.0:8080
+{ user1:
+   { name: 'mahesh',
+     password: 'password1',
+     profession: 'teacher',
+     id: 1 },
+  user2:
+   { name: 'suresh',
+     password: 'password2',
+     profession: 'librarian',
+     id: 2 },
+  user3:
+   { name: 'ramesh',
+     password: 'password3',
+     profession: 'clerk',
+     id: 3 } }
+```
+
+**[Back to TOC](#table-of-contents)**
+
+### Child Process
+#### childProcess.exec()
+**Code**
+##### support.js
+```js
+console.log("Child Process " + process.argv[2] + " executed");
+```
+##### master.js
+```js
+const fs = require('fs');
+const childProcess = require('child_process');
+
+for(var i=0; i < 3; i++) {
+    var workerProcess = childProcess.exec("node support.js " + i, (error, stdout, stderr) => {
+        if(error) {
+            console.log(error.stack);
+            console.log("Error Code", error.code);
+            console.log("Signal Received", error.signal);
+        } else {
+            console.log("stdout:" + stdout);
+            console.log("stderr:" + stderr);
+        }
+    });
+    workerProcess.on("exit", (code) => {
+        console.log("Child Process exited with EXIT Code %s", code);
+    })
+}
+```
+**Console Log**
+```console
+$ node master.js 
+Child Process exited with EXIT Code 0
+stdout:Child Process 0 executed
+
+stderr:
+Child Process exited with EXIT Code 0
+stdout:Child Process 1 executed
+
+stderr:
+Child Process exited with EXIT Code 0
+stdout:Child Process 2 executed
+
+stderr:
+```
+
+#### childProcess.spawn()
+**Code**
+##### support.js
+```js
+console.log("Child Process " + process.argv[2] + " executed");
+```
+##### master.js
+```js
+const fs = require('fs');
+const childProcess = require('child_process');
+
+for(var i=0; i < 3; i++) {
+    var workerProcess = childProcess.spawn("node", ['support.js', i]);
+    
+    workerProcess.stdout.on("data", (data) => {
+        console.log("stdout:", data.toString());
+    });
+    workerProcess.stderr.on("data", (data) => {
+        console.log("stderr:", data.toString());
+    });
+
+    workerProcess.on("exit", (code) => {
+        console.log("Child Process exited with EXIT Code %s", code);
+    });
+}
+```
+**Console Log**
+```console
+$ node master.js 
+stdout: Child Process 0 executed
+
+Child Process exited with EXIT Code 0
+stdout: Child Process 1 executed
+
+stdout: Child Process 2 executed
+
+Child Process exited with EXIT Code 0
+Child Process exited with EXIT Code 0
+```
+
+#### childProcess.fork()
+**Code**
+##### support.js
+```js
+console.log("Child Process " + process.argv[2] + " executed");
+```
+##### master.js
+```js
+const fs = require('fs');
+const childProcess = require('child_process');
+
+for(var i=0; i < 3; i++) {
+    var workerProcess = childProcess.fork('support.js', [i]);
+   
+    workerProcess.on("close", (code) => {
+        console.log("Child Process exited with EXIT Code %s", code);
+    });
+}
+```
+**Console Log**
+```console
+$ node master.js 
+Child Process 2 executed
+Child Process 1 executed
+Child Process 0 executed
+Child Process exited with EXIT Code 0
+Child Process exited with EXIT Code 0
+Child Process exited with EXIT Code 0
+```
+
+
+**[Back to TOC](#table-of-contents)**
+
+<!--
+## TEMPLATE
+### 
+#### 
+**Code**
+```js
+```
+**Console Log**
+```console
+```
+##### Request
+<p align="center">
+<kbd><img src="Images/13-03-2019-Express-Basic-WebApp-FileUpload-Response.PNG"></kbd>
+</p>
+##### Response
+<p align="center">
+<kbd><img src="Images/13-03-2019-Express-Basic-WebApp-FileUpload-Response.PNG"></kbd>
+</p>
 -->

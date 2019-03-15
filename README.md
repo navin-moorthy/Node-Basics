@@ -589,6 +589,7 @@ File read successfully
 ```
 
 #### File Open, Read, Close and Delete
+##### Example 1
 **Code**
 ```js
 const fs = require("fs");
@@ -626,6 +627,47 @@ fs.open("input.txt", "r+", (err, fd) => {
             });
         });
     });
+});
+```
+**Output**
+```console
+$ node app.js 
+Creating a write Operation
+Going to Open the file
+File Open Successfully
+Going to truncate the file after 10 bytes
+Going to read the Opened file
+Bytes read: 10
+File Read Successfully
+Tutorials 
+Going to close the file
+File closed Successfully
+Going to delete a file
+File deleted successfully
+```
+##### Example 2
+**Code**
+```js
+const fs = require('fs');
+
+fs.exists('foo.txt', (exists) => {
+    if(exists) {
+        fs.stat('foo.txt', (err, stats) => {
+            console.log(stats);
+            if(err) console.log(err);
+            fs.open('foo.txt', 'r', (err, fd) => {
+                if(err) console.log(err);
+                const buffer = new Buffer.alloc(stats.size);
+                fs.read(fd, buffer, 0, buffer.length, null, (err, bytesRead, buffer) => {
+                    if(err) console.log(err);
+                    console.log(buffer.toString('utf-8', 0, buffer.length));
+                    fs.close(fd, (err) => {
+                        if(err) console.log(err);
+                    });
+                });
+            });
+        });
+    }
 });
 ```
 **Output**
@@ -1783,4 +1825,7 @@ Child Process exited with EXIT Code 0
 <p align="center">
 <kbd><img src="Images/13-03-2019-Express-Basic-WebApp-FileUpload-Response.PNG"></kbd>
 </p>
+-->
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTQzMDAwNDY1MF19
 -->

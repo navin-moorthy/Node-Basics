@@ -36,6 +36,7 @@ This project is the home for my basics NodeJS L1 Training.
     - [File-write-and-read](#file-write-and-read)
     - [File-open-read-close-and-delete](#file-open-read-close-and-delete-a-file)
     - [Directory-create-read-and-delete](#directory-create-read-and-delete)
+    - [Watch Files for Changes](#watch---watch-the-file-for-any-changes)
 
 - #### [Utility Modules](#global-objects)
     - [Basic-objects](#basic-objects)
@@ -1839,5 +1840,5 @@ Child Process exited with EXIT Code 0
 </p>
 -->
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg4MjUxOTgzNywtMTk2NjgyMTg4OF19
+eyJoaXN0b3J5IjpbMjA4NDc1MDA3NSwtMTk2NjgyMTg4OF19
 -->

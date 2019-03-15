@@ -716,6 +716,20 @@ Files inside a directory ./test was read
 Going to delete the directory ./test/tmp
 Deleted the directory ./test/tmp
 ```
+#### watch() - Watch the file for any changes
+**Code**
+```js
+const fs = require('fs');
+var filename = 'test.txt';
+
+fs.watch(filename, { persistent: true }, (err, event) => {
+    if(err) console.log(err);
+    console.log(event + " event occured on " + filename)
+});
+```
+**Console Log**
+```console
+```
 **[Back to TOC](#table-of-contents)**
 
 ### Global Objects
@@ -1816,5 +1830,6 @@ Child Process exited with EXIT Code 0
 </p>
 -->
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5NjY4MjE4ODhdfQ==
+eyJoaXN0b3J5IjpbLTE4Njk5NjAyOTcsLTE5NjY4MjE4ODhdfQ
+==
 -->

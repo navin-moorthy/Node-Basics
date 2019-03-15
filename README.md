@@ -729,6 +729,15 @@ fs.watch(filename, { persistent: true }, (err, event) => {
 ```
 **Console Log**
 ```console
+$ node app.js 
+rename
+test.txt event occured on test.txt
+change
+test.txt event occured on test.txt
+rename
+test.txt event occured on test.txt
+rename
+test.txt event occured on test.txt
 ```
 **[Back to TOC](#table-of-contents)**
 
@@ -1830,6 +1839,5 @@ Child Process exited with EXIT Code 0
 </p>
 -->
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4Njk5NjAyOTcsLTE5NjY4MjE4ODhdfQ
-==
+eyJoaXN0b3J5IjpbLTg4MjUxOTgzNywtMTk2NjgyMTg4OF19
 -->

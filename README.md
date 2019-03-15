@@ -24,7 +24,7 @@ This project is the home for my basics NodeJS L1 Training.
     - [Buffer-copy](#buffer-copy)
     - [Buffer-slice](#buffer-slice)
 
-- #### [Streams](#streams)
+- #### [Streams](#streams-1)
     - [Create-read-stream](#create-read-stream)
     - [Create-write-stream](#create-write-stream)
     - [Pipe-read-stream-and-write-stream](#pipe-read-stream-and-write-stream)
@@ -32,7 +32,7 @@ This project is the home for my basics NodeJS L1 Training.
         + [File-compress](#file-compress)
         + [File-decompress](#file-decompress)
         
-- #### [File-system](#file-system)
+- #### [File-system](#file-system-1)
     - [File-write-and-read](#file-write-and-read)
     - [File-open-read-close-and-delete](#file-open-read-close-and-delete-a-file)
     - [Directory-create-read-and-delete](#directory-create-read-and-delete)
@@ -52,7 +52,7 @@ This project is the home for my basics NodeJS L1 Training.
     - [Simple-http-setup](#simple-http-setup)
     - [Detailed-http-server-and-client-setup](#detailed-http-server-and-client-setup)
 
-- #### [Express](#express)
+- #### [Express](#express-1)
     - [Basic Express App](#demo-basic-app)
     - [GET Form Data](#get-input-through-form)
     - [POST Form Data](#post-input-through-form)
@@ -64,7 +64,7 @@ This project is the home for my basics NodeJS L1 Training.
     - [SHOW&UPDATE](#show-user)
     - [DELETE](#delete-request)
 
-- #### [Child Process](#child-process)
+- #### [Child Process](#child-process-1)
     - [exec()](#childprocessexec)
     - [spawn()](#childprocessspawn)
     - [fork()](#childprocessfork)
@@ -1840,5 +1840,5 @@ Child Process exited with EXIT Code 0
 </p>
 -->
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTc2MDgzMTE1OSwtMTk2NjgyMTg4OF19
+eyJoaXN0b3J5IjpbLTk1MTgwMTU0NSwtMTk2NjgyMTg4OF19
 -->

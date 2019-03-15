@@ -12,7 +12,7 @@ This project is the home for my basics NodeJS L1 Training.
     - [FS in Blocking Mode](#running-file-read-synchronously)
     - [FS in Non-Blocking Mode](#running-file-read-asynchronously)
 
-- #### [Events](#subcription-and-publish-method-event-emitter-1)
+- #### [Events](#subcription-and-publish-method---event-emitter)
     - [Example 1](#example-1-1)
     - [Example 2](#example-2-1)
     - [Example 3](#example-3)
@@ -1840,5 +1840,5 @@ Child Process exited with EXIT Code 0
 </p>
 -->
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTEzMTM1NTk2MywtMTk2NjgyMTg4OF19
+eyJoaXN0b3J5IjpbMTc2MDgzMTE1OSwtMTk2NjgyMTg4OF19
 -->

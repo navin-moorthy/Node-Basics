@@ -672,19 +672,8 @@ fs.exists('foo.txt', (exists) => {
 ```
 **Output**
 ```console
-$ node app.js 
-Creating a write Operation
-Going to Open the file
-File Open Successfully
-Going to truncate the file after 10 bytes
-Going to read the Opened file
-Bytes read: 10
-File Read Successfully
-Tutorials 
-Going to close the file
-File closed Successfully
-Going to delete a file
-File deleted successfully
+$ node fs.js 
+foo bar foo foo foo foo bar bar bar foo
 ```
 
 #### Directory Create, read and delete
@@ -1827,5 +1816,5 @@ Child Process exited with EXIT Code 0
 </p>
 -->
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQzMDAwNDY1MF19
+eyJoaXN0b3J5IjpbLTE5NjY4MjE4ODhdfQ==
 -->

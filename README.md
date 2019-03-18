@@ -1201,6 +1201,36 @@ $ node client.js
     </body>
 </html>
 ```
+
+#### More Examples
+```js
+const http = require('http');
+const fs = require('fs');
+
+http.createServer((request, response) => {
+        const { headers, method, url } = request;
+          let body = [];
+          request.on('error', (err) => {
+            console.error(err);
+          }).on('data', (chunk) => {
+            body.push(chunk);
+          }).on('end', () => {
+            body = Buffer.concat(body).toString();
+            response.on('error', (err) => {
+              console.error(err);
+            });
+        
+            response.writeHead(200, {'Content-Type': 'application/json'});
+        
+            const responseBody = { headers, method, url, body };
+        
+            response.write(JSON.stringify(responseBody));
+            response.end();
+        
+          });
+}).listen(process.env.PORT, process.env.IP);
+```
+
 **[Back to TOC](#table-of-contents)**
 
 ### Express
@@ -1840,5 +1870,6 @@ Child Process exited with EXIT Code 0
 </p>
 -->
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTk1MTgwMTU0NSwtMTk2NjgyMTg4OF19
+eyJoaXN0b3J5IjpbLTE4MDMyOTQwNSwtOTUxODAxNTQ1LC0xOT
+Y2ODIxODg4XX0=
 -->

@@ -51,6 +51,7 @@ This project is the home for my basics NodeJS L1 Training.
 - #### [http Module](#http-module-1)
     - [Simple-http-setup](#simple-http-setup)
     - [Detailed-http-server-and-client-setup](#detailed-http-server-and-client-setup)
+    - [More Examples](#more-examples)
 
 - #### [Express](#express-1)
     - [Basic Express App](#demo-basic-app)
@@ -1230,6 +1231,26 @@ http.createServer((request, response) => {
           });
 }).listen(process.env.PORT, process.env.IP);
 ```
+```js
+const http = require('http');
+
+http.createServer((request, response) => {
+  request.on('error', (err) => {
+    console.error(err);
+    response.statusCode = 400;
+    response.end();
+  });
+  response.on('error', (err) => {
+    console.error(err);
+  });
+  if (request.method === 'POST' && request.url === '/echo') {
+    request.pipe(response);
+  } else {
+    response.statusCode = 404;
+    response.end();
+  }
+}).listen(process.env.PORT, process.env.IP);
+```
 
 **[Back to TOC](#table-of-contents)**
 
@@ -1847,7 +1868,6 @@ Child Process exited with EXIT Code 0
 Child Process exited with EXIT Code 0
 ```
 
-
 **[Back to TOC](#table-of-contents)**
 
 <!--
@@ -1870,6 +1890,6 @@ Child Process exited with EXIT Code 0
 </p>
 -->
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4MDMyOTQwNSwtOTUxODAxNTQ1LC0xOT
+eyJoaXN0b3J5IjpbLTc3MDA1ODg1NywtOTUxODAxNTQ1LC0xOT
 Y2ODIxODg4XX0=
 -->

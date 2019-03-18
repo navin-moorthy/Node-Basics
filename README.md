@@ -1869,7 +1869,135 @@ Child Process exited with EXIT Code 0
 ```
 **[Back to TOC](#table-of-contents)**
 
-#### Connecting with Database
+### Connecting with Database
+#### MySQL
+```js
+const mysql = require('mysql');
+
+const connection = mysql.createConnection({
+    host: 'localhost',
+    port: 3306,
+    user: process.env.C9_USER,
+    password: '',
+    database: 'c9',
+    multipleStatements: true
+});
+
+connection.connect( (err) => {
+    if(err) throw err;
+    console.log("Connected!!");
+});
+
+// Insert new employee into the database
+const employee = {  name: 'Navin', location: 'Bangalore' };
+
+connection.query('INSERT INTO employees SET ?', employee, (err, res) => {
+    if(err) throw err;
+    console.log("Last insert ID: %s", res.insertId);
+});
+
+/// Updata the existing employee details
+// connection.query("UPDATE employees SET id = ? WHERE name = ?", [5, 'Navin'], (err, res) => {
+//     if(err) throw err;
+//     console.log(`Changed ${res.changedRows} row(s)`);
+// });
+
+// Delete an existing row from the employees table
+connection.query("DELETE FROM employees WHERE id = ?", 5, (err, res) => {
+    if(err) throw err;
+    console.log(`Deleted ${res.affectedRows} row(s)`);
+});
+
+// Created a new STORED PROCEDURE in the name of sp_getall()
+
+// DELIMITER // --- Delimiter changes the default mysql ending ; with //
+// mysql> CREATE PROCEDURE `sp_getall`()
+//     -> BEGIN
+//     -> SELECT id, name, location FROM employees;
+//     -> END //
+// Query OK, 0 rows affected (0.00 sec)
+// mysql> DELIMITER ; --- Again changing the delimiter back to ;
+connection.query("CALL sp_getall()", (err, rows) => {
+    if(err) throw err;
+    console.log("Data received from the database:\n");
+    rows[0].forEach((row) => {
+        console.log(`${row.name} is in ${row.location}`);
+    });
+});
+
+
+// Created a new STORED PROCEDURE in the name of sp_get_employee_detail(?)
+// CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_get_employee_detail`(
+//   in employee_id int
+// )
+// BEGIN
+//   SELECT name, location FROM employees where id = employee_id;
+// END
+connection.query("CALL sp_get_employee_detail(3)", (err, rows) => {
+    if(err) throw err;
+    console.log("Data received from the database:\n");
+    rows[0].forEach((row) => {
+        console.log(`${row.name} is in ${row.location}`);
+    });
+});
+
+// Created a new STORED PROCEDURE in the name of sp_insert_employee()
+// CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_insert_employee`(
+//   out employee_id int,
+//   in employee_name varchar(25),
+//   in employee_location varchar(25)
+// )
+// BEGIN
+//   insert into employees(name, location)
+//   values(employee_name, employee_location);
+//   set employee_id = LAST_INSERT_ID();
+// END
+connection.query(
+  "SET @employee_id = 0; CALL sp_insert_employee(@employee_id, 'Ron', 'USA'); SELECT @employee_id",
+  (err, rows) => {
+    if (err) throw err;
+
+    console.log('Data received from Db:\n');
+    console.log(rows);
+  }
+);
+
+// Show the entire employee table from the database.
+connection.query('SELECT * FROM employees', (err, rows) => {
+    if(err) throw err;
+    console.log("Data received from the database:\n");
+    rows.forEach((row) => {
+        console.log(`${row.name} is in ${row.location}`);
+    });
+});
+
+// Harmful mysql
+const userLandVariable = '4 OR 1=1';
+
+connection.query(
+  `SELECT * FROM employees WHERE id = ${userLandVariable}`,
+  (err, rows) => {
+    if(err) throw err;
+    console.log(rows);
+  }
+);
+
+
+// Vulnerable Code escaped
+const userLandVariable = '4 OR 1=1';
+connection.query(
+  `SELECT * FROM employees WHERE id = ${mysql.escape(userLandVariable)}`,
+  function(err, rows, fields){ 
+    if(err) throw err;
+    console.log(rows);
+    console.log(fields);
+  }
+);
+
+connection.end((err) => {
+    if(err) throw err;
+});
+```
 
 <!--
 ## TEMPLATE
@@ -1891,6 +2019,6 @@ Child Process exited with EXIT Code 0
 </p>
 -->
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5MjA4NzIyNDYsLTk1MTgwMTU0NSwtMT
-k2NjgyMTg4OF19
+eyJoaXN0b3J5IjpbNjkyMzYxOTE3LC05NTE4MDE1NDUsLTE5Nj
+Y4MjE4ODhdfQ==
 -->

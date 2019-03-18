@@ -70,7 +70,8 @@ This project is the home for my basics NodeJS L1 Training.
     - [spawn()](#childprocessspawn)
     - [fork()](#childprocessfork)
 
-- #### [Connecting with Database](#connecting-with-dat) 
+- #### [Connecting with Database](#connecting-with-database)
+	- [MySQL](m 
 
 ## Notes taken during the training for future use.
 
@@ -2021,6 +2022,6 @@ connection.end((err) => {
 </p>
 -->
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQwNzYxNTI0OCwtOTUxODAxNTQ1LC0xOT
-Y2ODIxODg4XX0=
+eyJoaXN0b3J5IjpbOTE5MzE5NjMwLC05NTE4MDE1NDUsLTE5Nj
+Y4MjE4ODhdfQ==
 -->

@@ -70,6 +70,8 @@ This project is the home for my basics NodeJS L1 Training.
     - [spawn()](#childprocessspawn)
     - [fork()](#childprocessfork)
 
+- #### [Connecting with Database](#connecting-with-dat) 
+
 ## Notes taken during the training for future use.
 
 ### To test the Asyncronous Nature
@@ -1888,6 +1890,15 @@ connection.connect( (err) => {
     console.log("Connected!!");
 });
 
+// Show the entire employee table from the database.
+connection.query('SELECT * FROM employees', (err, rows) => {
+    if(err) throw err;
+    console.log("Data received from the database:\n");
+    rows.forEach((row) => {
+        console.log(`${row.name} is in ${row.location}`);
+    });
+});
+
 // Insert new employee into the database
 const employee = {  name: 'Navin', location: 'Bangalore' };
 
@@ -1962,15 +1973,6 @@ connection.query(
   }
 );
 
-// Show the entire employee table from the database.
-connection.query('SELECT * FROM employees', (err, rows) => {
-    if(err) throw err;
-    console.log("Data received from the database:\n");
-    rows.forEach((row) => {
-        console.log(`${row.name} is in ${row.location}`);
-    });
-});
-
 // Harmful mysql
 const userLandVariable = '4 OR 1=1';
 
@@ -2019,6 +2021,6 @@ connection.end((err) => {
 </p>
 -->
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjkyMzYxOTE3LC05NTE4MDE1NDUsLTE5Nj
-Y4MjE4ODhdfQ==
+eyJoaXN0b3J5IjpbMTQwNzYxNTI0OCwtOTUxODAxNTQ1LC0xOT
+Y2ODIxODg4XX0=
 -->

@@ -72,6 +72,7 @@ This project is the home for my basics NodeJS L1 Training.
 
 - #### [Connecting with Database](#connecting-with-database-1)
 	- [MySQL](#mysql) 
+	- [MongoDB](#mongodb) 
 
 ## Notes taken during the training for future use.
 
@@ -2001,6 +2002,357 @@ connection.end((err) => {
     if(err) throw err;
 });
 ```
+
+#### MongoDB
+
+**Code**
+```js
+const MongoClient = require('mongodb').MongoClient;
+const assert = require('assert');
+
+const url = "mongodb://localhost:27017";
+
+const dbname = "testmongo";
+
+const client = new MongoClient(url,  {useNewUrlParser: true});
+
+client.connect((err) => {
+    assert.equal(null, err);
+    console.log("Connected successfully to server");
+    const db = client.db(dbname);
+    insertDocuments(db, () => {
+        client.close();
+    });
+});
+
+
+
+/*
+ * Function:Insert Documents
+ */
+ 
+const insertDocuments = (db, callback) => {
+    const collection = db.collection('documents');
+    collection.insertMany([{a:1}, {b: 2}, {c: 3}], (err, result) => {
+        if(err) throw err;
+        assert.equal(err, null)
+        console.log(result);
+        assert.equal(3, result.result.n);
+        assert.equal(3, result.ops.length);
+        console.log("Inserted 3 documents into the collection");
+        callback(result);
+    });
+};
+```
+**Console Log**
+```console
+Connected successfully to server
+{ result: { ok: 1, n: 3 },
+  ops:
+   [ { a: 1, _id: 5c8f738f6111920d6a1157eb },
+     { b: 2, _id: 5c8f738f6111920d6a1157ec },
+     { c: 3, _id: 5c8f738f6111920d6a1157ed } ],
+  insertedCount: 3,
+  insertedIds:
+   { '0': 5c8f738f6111920d6a1157eb,
+     '1': 5c8f738f6111920d6a1157ec,
+     '2': 5c8f738f6111920d6a1157ed } }
+Inserted 3 documents into the collection
+```
+
+**Code**
+```js
+const MongoClient = require('mongodb').MongoClient;
+const assert = require('assert');
+
+const url = "mongodb://localhost:27017";
+
+const dbname = "testmongo";
+
+const client = new MongoClient(url,  {useNewUrlParser: true});
+
+client.connect((err) => {
+    assert.equal(null, err);
+    console.log("Connected successfully to server");
+    const db = client.db(dbname);
+    insertDocuments(db, () => {
+        findDocuments(db, () => {
+            client.close();
+        });
+    });
+});
+
+
+
+/*
+ * Function:Insert Documents
+ */
+ 
+const insertDocuments = (db, callback) => {
+    const collection = db.collection('documents');
+    collection.insertMany([{a:1}, {b: 2}, {c: 3}], (err, result) => {
+        if(err) throw err;
+        assert.equal(err, null)
+        assert.equal(3, result.result.n);
+        assert.equal(3, result.ops.length);
+        console.log("Inserted 3 documents into the collection");
+        callback(result);
+    });
+};
+
+/*
+ * Function:Find all documents
+ */
+const findDocuments = (db, callback) => {
+    const collection = db.collection('documents');
+    collection.find({}).toArray((err, docs) => {
+        if(err) throw err;
+        assert.equal(err, null);
+        console.log("Found the following records");
+        console.log(docs);
+        callback(docs);
+    });
+};
+```
+**Console Log
+```console
+Connected successfully to server
+Inserted 3 documents into the collection
+Found the following records
+[ { _id: 5c8f77e63998ad0e3cfbd928, a: 1 },
+  { _id: 5c8f77e63998ad0e3cfbd929, b: 2 },
+  { _id: 5c8f77e63998ad0e3cfbd92a, c: 3 } ]
+```
+
+**Code**
+```js
+const MongoClient = require('mongodb').MongoClient;
+const assert = require('assert');
+
+const url = "mongodb://localhost:27017";
+
+const dbname = "testmongo";
+
+const client = new MongoClient(url,  {useNewUrlParser: true});
+
+client.connect((err) => {
+    assert.equal(null, err);
+    console.log("Connected successfully to server");
+    const db = client.db(dbname);
+    insertDocuments(db, () => {
+        findDocuments(db, () => {
+            client.close();
+        });
+    });
+});
+
+
+
+/*
+ * Function:Insert Documents
+ */
+ 
+const insertDocuments = (db, callback) => {
+    const collection = db.collection('documents');
+    collection.insertMany([{a:1}, {b: 2}, {c: 3}], (err, result) => {
+        if(err) throw err;
+        assert.equal(err, null)
+        assert.equal(3, result.result.n);
+        assert.equal(3, result.ops.length);
+        console.log("Inserted 3 documents into the collection");
+        callback(result);
+    });
+};
+
+/*
+ * Function:Find a particular document
+ */
+const findDocuments = (db, callback) => {
+    const collection = db.collection('documents');
+    collection.find({"a":1}).toArray((err, docs) => {
+        if(err) throw err;
+        assert.equal(err, null);
+        console.log("Found the following records");
+        console.log(docs);
+        callback(docs);
+    });
+};
+```
+**Console Log
+```console
+Connected successfully to server
+Inserted 3 documents into the collection
+Found the following records
+[ { _id: 5c8f78d4baf50d0ea4e37d21, a: 1 } ]
+```
+
+**Code**
+```js
+const MongoClient = require('mongodb').MongoClient;
+const assert = require('assert');
+
+const url = "mongodb://localhost:27017";
+
+const dbname = "testmongo";
+
+const client = new MongoClient(url,  {useNewUrlParser: true});
+
+client.connect((err) => {
+    assert.equal(null, err);
+    console.log("Connected successfully to server");
+    const db = client.db(dbname);
+    updateDocument(db, () => {
+        findDocuments(db, () => {
+        client.close();
+        });
+    });
+});
+
+/*
+ * Function:Update a document
+ */
+ 
+const updateDocument = (db, callback) => {
+    const collection = db.collection('documents');
+    collection.updateOne({"b": 2}, { $set: {"a": 2}}, (err, result) => {
+        if(err) throw err;
+        assert(1, result.result.n);
+        console.log("Updated the Document");
+        callback(result);
+    });
+};
+
+/*
+ * Function:Find all documents
+ */
+ 
+const findDocuments = (db, callback) => {
+    const collection = db.collection('documents');
+    collection.find({}).toArray((err, docs) => {
+        if(err) throw err;
+        assert.equal(err, null);
+        console.log("Found the following records");
+        console.log(docs);
+        callback(docs);
+    });
+};
+```
+**Console Log
+```console
+Connected successfully to server
+Updated the Document
+Found the following records
+[ { _id: 5c8f7b3ab3af8a0eff76abc4, a: 1 },
+  { _id: 5c8f7b3ab3af8a0eff76abc5, b: 2, a: 2 },
+  { _id: 5c8f7b3ab3af8a0eff76abc6, c: 3 } ]
+```
+
+**Code**
+```js
+const MongoClient = require('mongodb').MongoClient;
+const assert = require('assert');
+
+const url = "mongodb://localhost:27017";
+
+const dbname = "testmongo";
+
+const client = new MongoClient(url,  {useNewUrlParser: true});
+
+client.connect((err) => {
+    assert.equal(null, err);
+    console.log("Connected successfully to server");
+    const db = client.db(dbname);
+    removeDocument(db, () => {
+        findDocuments(db, () => {
+        client.close();
+        });
+    });
+});
+
+/*
+ * Function:Update a document
+ */
+ 
+const removeDocument = (db, callback) => {
+    const collection = db.collection('documents');
+    collection.deleteOne({"c": 3}, (err, result) => {
+        if(err) throw err;
+        assert(1, result.result.n);
+        console.log("Removed the Document");
+        callback(result);
+    });
+};
+
+/*
+ * Function:Find all documents
+ */
+ 
+const findDocuments = (db, callback) => {
+    const collection = db.collection('documents');
+    collection.find({}).toArray((err, docs) => {
+        if(err) throw err;
+        assert.equal(err, null);
+        console.log("Found the following records");
+        console.log(docs);
+        callback(docs);
+    });
+};
+```
+**Console Log
+```console
+Connected successfully to server
+Removed the Document
+Found the following records
+[ { _id: 5c8f7b3ab3af8a0eff76abc4, a: 1 },
+  { _id: 5c8f7b3ab3af8a0eff76abc5, b: 2, a: 2 } ]
+```
+
+**Code**
+```js
+```
+**Console Log
+```console
+```
+
+**Code**
+```js
+const MongoClient = require('mongodb').MongoClient;
+const assert = require('assert');
+
+const url = "mongodb://localhost:27017";
+
+const dbname = "testmongo";
+
+const client = new MongoClient(url,  {useNewUrlParser: true});
+
+client.connect((err) => {
+    assert.equal(null, err);
+    console.log("Connected successfully to server");
+    const db = client.db(dbname);
+    indexCollection(db, () => {
+        client.close();
+
+    });
+});
+
+/*
+ * Function:Index Collection
+ */
+ 
+const indexCollection = (db, callback) => {
+    db.collection("documents").createIndex({"a": 1}, null, (err, result) => {
+        if(err) throw err;
+        console.log(result);
+        callback();
+    });
+};
+```
+**Console Log
+```console
+Connected successfully to server
+a_1
+```
+
 
 <!--
 ## TEMPLATE

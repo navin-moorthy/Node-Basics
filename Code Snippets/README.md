@@ -237,7 +237,7 @@
     **Formatted Downloaded Google Homepage**
     
     <p align="center">
-    <kbd><img src="Code%20Snippets/Images/19-03-2019-7-Google-HomePage-Download.PNG"></kbd>
+    <kbd><img src="https://github.com/NavinNavi19/Node-Basics/blob/master/Code%20Snippets/Images/19-03-2019-7-Google-HomePage-Download.PNG"></kbd>
     </p>
 
 8. **Create a simple HTTP server that responds to requests with a simple HTML response. (using http module)**
@@ -261,7 +261,7 @@
     **Output**
 
     <p align="center">
-    <kbd><img src="Code%20Snippets/Images/19-03-2019-7-simple-http-server.PNG"></kbd>
+    <kbd><img src="https://github.com/NavinNavi19/Node-Basics/blob/master/Code%20Snippets/Images/19-03-2019-7-simple-http-server.PNG"></kbd>
     </p>
 
 9. **Create a program to accept client requests on a socket (using net module) and further to create client socket for communication**

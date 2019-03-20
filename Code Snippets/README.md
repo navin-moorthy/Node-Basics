@@ -1,6 +1,6 @@
-# Hands on assignments  :
+# Code Snippets  :
 
-1. **Create an Object type in Java Script and add functions & variables to it?**
+1. **An Object type in Java Script and added functions & variables to it?**
 
     **Answer**
 
@@ -32,7 +32,7 @@
     Project Creation: 'project' was created on 18th March 2019
     ```
 
-2. **Create an array, add variables and function to it through push()**
+2. **Create array then add variables and function to it through push()**
     
     **Answer**
     
@@ -88,7 +88,7 @@
     Project Creation: 'project' was created on 18th March 2019
     ```
 
-3. **Create a ‘js’ file with code that provides implementation for ‘pwd’ command from ‘Node’ shell.**
+3. **Access the present Working directory**
 
     **Answer**
 
@@ -103,7 +103,7 @@
     /home/ubuntu/workspace/Node Learnings
     ```
 
-4. **Create NodeJS based script file, that reads the name of the directory  from the command line arguments and displays the list of directory contents (using fs module)**
+4. **Reads the name of the directory  from the command line arguments and displays the list of directory contents (using fs module)**
 
     **Answer**
 
@@ -130,7 +130,7 @@
     foobar.pdf
     ```
 
-5. **Create a Node JS script that reads the file name from console and displays the contents of the file**
+5. **Reads the file name from console and displays the contents of the file**
     - Synchronous mode
     - Asynchronous mode
 
@@ -168,7 +168,7 @@
     Project Owner: Navin
     ```
 
-6. **Create a Node JS Script that displays a message through loop, with delay in between the iterations Using setTimeOut()**
+6. **Displays a message through loop, with delay in between the iterations Using setTimeOut()**
 
     **Answer**
 
@@ -199,8 +199,7 @@
     I am printed at 837ms
     ```
 
-7. **Create a Node JS Script, using ‘http’ module that downloads the content from a web page to a file**
-    - E.g. to download the google home page
+7. **Using ‘http’ module Downloads the content from google home page to a file**
 
     **Answer**
 
@@ -240,7 +239,7 @@
     <kbd><img src="https://github.com/NavinNavi19/Node-Basics/blob/master/Code%20Snippets/Images/19-03-2019-7-Google-HomePage-Download.PNG"></kbd>
     </p>
 
-8. **Create a simple HTTP server that responds to requests with a simple HTML response. (using http module)**
+8. **Create a HTTP server that responds to requests. (using http module)**
 
     **Answer**
 
@@ -264,10 +263,7 @@
     <kbd><img src="https://github.com/NavinNavi19/Node-Basics/blob/master/Code%20Snippets/Images/19-03-2019-7-simple-http-server.PNG"></kbd>
     </p>
 
-9. **Create a program to accept client requests on a socket (using net module) and further to create client socket for communication**
-    - Create Server socket that listens at a port number and creates sockets for every client request.
-    - Send a message from any of the client (socket) and through code the message should be propagated to all the sockets which are active
-    - Test it through ‘telnet’, to see the message echo.
+9. **Chat Application using server and client sockets**
 
     **Answer**
 
@@ -419,7 +415,7 @@
     Everyone has left the server
     ```
 
-10. **Create a Node JS script that uses ‘mongodb’ module to read the data from a table in ‘mongodb’ database and display the details on console.**
+10. **Using ‘mongodb’ module read the data from a table in ‘mongodb’ database and display the details on console.**
 
     **Answer**
 
@@ -468,7 +464,7 @@
     { _id: 5c920fc86acbbdb5b39c41db, d: 4 } ]
     ```
     
-11. **Create a Node JS Script that uses ‘mongodb’ specific modules and provides ‘CRUD’ operations on a Collection of MongoDB database.**
+11. **Uses ‘mongodb’ module perform ‘CRUD’ operations on a Collection of MongoDB database.**
 
     **Answer**
 

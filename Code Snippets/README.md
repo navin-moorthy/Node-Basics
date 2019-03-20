@@ -423,12 +423,49 @@
 
     **Answer**
 
-    **Code**
+    **Data to be read from the database**
+    ```console
+    > db.documents.find()
+    { "_id" : ObjectId("5c920fb46acbbdb5b39c41d8"), "a" : 1 }
+    { "_id" : ObjectId("5c920fba6acbbdb5b39c41d9"), "b" : 2 }
+    { "_id" : ObjectId("5c920fc16acbbdb5b39c41da"), "c" : 3 }
+    { "_id" : ObjectId("5c920fc86acbbdb5b39c41db"), "d" : 4 }
+    ```
+    **Node Script to read the data from the database**
     ```js
+    const MongoClient = require('mongodb').MongoClient;
+
+    const url = "mongodb://localhost:27017";
+    const dbname = "testmongo"
+
+    const client = new MongoClient(url, {useNewUrlParser: true});
+
+    client.connect((err) => {
+    if(err) throw err;
+    console.log("Connected to the database");
+    const db = client.db(dbname);
+    readFromDatabase(db, () => {
+        client.close();
+    });
+    });
+
+    function readFromDatabase(db, callback){
+    const collections = db.collection("documents");
+    collections.find({}).toArray((err, data) => {
+        if(err) throw err;
+        console.log(data);
+    });
+    }
     ```
 
     **Console Log**
     ```console
+    [nodemon] starting `node app.js`
+    Connected to the database
+    [ { _id: 5c920fb46acbbdb5b39c41d8, a: 1 },
+    { _id: 5c920fba6acbbdb5b39c41d9, b: 2 },
+    { _id: 5c920fc16acbbdb5b39c41da, c: 3 },
+    { _id: 5c920fc86acbbdb5b39c41db, d: 4 } ]
     ```
     
 11. **Create a Node JS Script that uses ‘mongodb’ specific modules and provides ‘CRUD’ operations on a Collection of MongoDB database.**
@@ -437,17 +474,131 @@
 
     **Code**
     ```js
+    const MongoClient = require('mongodb').MongoClient;
+
+    const url = "mongodb://localhost:27017";
+
+    const client = new MongoClient(url, {useNewUrlParser: true});
+
+    const dbname = "testmongo";
+
+    client.connect((err) => {
+    if(err) throw err;
+    console.log("Connected to the database \n");
+    
+    const db = client.db(dbname);
+    const collection = db.collection('users');
+    
+    /**
+    * C - Create
+    * R - Read
+    * U - Update
+    * D - Delete
+    */
+    
+    collectionCreate(collection, () => {
+        collectionRead(collection, () => {
+        collectionUpdate(collection, () => {
+            collectionDelete(collection, () => {
+            client.close();         
+            });
+        });
+        });
+    });
+    });
+
+    // Create a new collection of objects in the database
+    function collectionCreate(collection, callback) {
+    let userNames = [
+        {user1 : "Flash"},
+        {user2 : "Arrow"},
+        {user3 : "Access"},
+        {user4 : "Speedy"}
+    ];
+    collection.insertMany(userNames, (err, result) => {
+        if(err) throw err;
+        if((result.result.n) === 4) {
+        console.log("Created a list of 4 users into the collection");
+        collectionReadAll(collection);
+        callback();
+        }
+    });
+    }
+
+    // Read an object from the "users" collection created in the database
+    function collectionRead(collection, callback) {
+    collection.find({user1: "Flash"}).toArray((err, data) => {
+        if(err) throw err;
+        console.log("\nRead a particular data from the collections list");
+        console.log(data);
+        callback();
+    });
+    }
+
+    // Update an object with new data into the "users" collection
+    function collectionUpdate(collection, callback) {
+    collection.updateOne({"user4": "Speedy"}, { $set: {"user4": "Reverse Flash"}}, (err, result) => {
+        if(err) console.log(err);
+        if(result.result.n === 1) {
+        console.log("\nUpdated 4th object with a new data");
+        collectionReadAll(collection);
+        callback();
+        }
+    });
+    }
+
+    // Delete an object from the "users" collection
+    function collectionDelete(collection, callback) {
+    collection.deleteOne({"user4": "Reverse Flash"}, (err, result) => {
+        if(err) throw(err);
+        if(result.result.n === 1) {
+        console.log("\nDeleted the 4th object from the collection list");
+        collectionReadAll(collection);
+        callback();
+        }
+    });
+    }
+
+    // Read all the data from the "users" collection
+    function collectionReadAll(collection) {
+    collection.find({}).toArray((err, data) => {
+        if(err) throw err;
+        console.log(data);
+    });
+    }
     ```
 
     **Console Log**
     ```console
+    [nodemon] starting `node app.js`
+    Connected to the database 
+
+    Created a list of 4 users into the collection
+    [ { _id: 5c9221be191e2f222f7fa083, user1: 'Flash' },
+    { _id: 5c9221be191e2f222f7fa084, user2: 'Arrow' },
+    { _id: 5c9221be191e2f222f7fa085, user3: 'Access' },
+    { _id: 5c9221be191e2f222f7fa086, user4: 'Speedy' } ]
+
+    Read a particular data from the collections list
+    [ { _id: 5c9221be191e2f222f7fa083, user1: 'Flash' } ]
+
+    Updated 4th object with a new data
+    [ { _id: 5c9221be191e2f222f7fa083, user1: 'Flash' },
+    { _id: 5c9221be191e2f222f7fa084, user2: 'Arrow' },
+    { _id: 5c9221be191e2f222f7fa085, user3: 'Access' },
+    { _id: 5c9221be191e2f222f7fa086, user4: 'Reverse Flash' } ]
+
+    Deleted the 4th object from the collection list
+    [ { _id: 5c9221be191e2f222f7fa083, user1: 'Flash' },
+    { _id: 5c9221be191e2f222f7fa084, user2: 'Arrow' },
+    { _id: 5c9221be191e2f222f7fa085, user3: 'Access' } ]
     ```
 
 
 <!--
 **Answer**
 
-**Code**
+**Node Script**
 ```js
 ```
 

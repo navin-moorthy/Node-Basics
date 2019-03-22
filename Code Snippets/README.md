@@ -1,8 +1,7 @@
 # Code Snippets  :
 
-1. **An Object type in Java Script and added functions & variables to it?**
+`**An Object type in Java Script and added functions & variables to it?**`
 
-**Answer**
 
 **Code**
 ```js
@@ -32,9 +31,8 @@ Project Description: 'project' is a simple object created to add variables and f
 Project Creation: 'project' was created on 18th March 2019
 ```
 
-2. **Create array then add variables and function to it through push()**
+`**Create array then add variables and function to it through push()**`
 
-**Answer**
 
 **Code**
 ```js
@@ -88,9 +86,8 @@ Project Description: 'project1' is a simple object created to add variables and 
 Project Creation: 'project' was created on 18th March 2019
 ```
 
-3. **Access the present Working directory**
+`**Access the present Working directory**`
 
-**Answer**
 
 **Code**
 ```js
@@ -103,9 +100,8 @@ console.log(process.cwd());
 /home/ubuntu/workspace/Node Learnings
 ```
 
-4. **Reads the name of the directory  from the command line arguments and displays the list of directory contents (using fs module)**
+`**Reads the name of the directory  from the command line arguments and displays the list of directory contents (using fs module)**`
 
-**Answer**
 
 **Code**
 ```js
@@ -130,11 +126,10 @@ foo.html
 foobar.pdf
 ```
 
-5. **Reads the file name from console and displays the contents of the file**
-- Synchronous mode
-- Asynchronous mode
+`**Reads the file name from console and displays the contents of the file**`
+- `Synchronous mode`
+- `Asynchronous mode`
 
-**Answer**
 
 **Code**
 ```js
@@ -168,9 +163,8 @@ Project Name: Creating an Object Type
 Project Owner: Navin
 ```
 
-6. **Displays a message through loop, with delay in between the iterations Using setTimeOut()**
+`**Displays a message through loop, with delay in between the iterations Using setTimeOut()**`
 
-**Answer**
 
 **Code**
 ```js
@@ -199,9 +193,8 @@ I am printed at 742ms
 I am printed at 837ms
 ```
 
-7. **Using ‘http’ module Downloads the content from google home page to a file**
+`**Using ‘http’ module Downloads the content from google home page to a file**`
 
-**Answer**
 
 **Code**
 ```js
@@ -239,9 +232,8 @@ req.end();
 <kbd><img src="https://github.com/NavinNavi19/Node-Basics/blob/master/Code%20Snippets/Images/19-03-2019-7-Google-HomePage-Download.PNG"></kbd>
 </p>
 
-8. **Create a HTTP server that responds to requests. (using http module)**
+`**Create a HTTP server that responds to requests. (using http module)**`
 
-**Answer**
 
 **Code**
 ```js
@@ -263,9 +255,8 @@ server.listen(process.env.PORT, process.env.IP)
 <kbd><img src="https://github.com/NavinNavi19/Node-Basics/blob/master/Code%20Snippets/Images/19-03-2019-7-simple-http-server.PNG"></kbd>
 </p>
 
-9. **Chat Application using server and client sockets**
+`**Chat Application using server and client sockets**`
 
-**Answer**
 
 **Code**
 ```js
@@ -415,9 +406,8 @@ Socket : 54940 left the server
 Everyone has left the server
 ```
 
-10. **Using ‘mongodb’ module read the data from a table in ‘mongodb’ database and display the details on console.**
+`**Using ‘mongodb’ module read the data from a table in ‘mongodb’ database and display the details on console.**`
 
-**Answer**
 
 **Data to be read from the database**
 ```console
@@ -464,9 +454,8 @@ Connected to the database
 { _id: 5c920fc86acbbdb5b39c41db, d: 4 } ]
 ```
 
-11. **Uses ‘mongodb’ module perform ‘CRUD’ operations on a Collection of MongoDB database.**
+`**Uses ‘mongodb’ module perform ‘CRUD’ operations on a Collection of MongoDB database.**`
 
-**Answer**
 
 **Code**
 ```js
@@ -590,9 +579,8 @@ Deleted the 4th object from the collection list
 { _id: 5c9221be191e2f222f7fa085, user3: 'Access' } ]
 ```
 
-#### `a) Create a Node JS Script file that displays hostname & platform details of current system on the console.(Hint : Use OS module)`
+`**Hostname & Platform details(OS Module)**`
 
-**Answer**
 
 **Code**
 ```js
@@ -608,9 +596,8 @@ Hostname: navinnavi19-yelpcamp-6787935
 Platform: linux
 ```
 
-#### `b) Create a Node JS script file that displays “Hello” text in red color and “Welcome to Node JS” text in rainbow colors on the console. (Hint: Use Colors module)`
+`**Displays “Hello” text in red color and “Welcome to Node JS” text in rainbow colors(Colors Module)**`
 
-**Answer**
 
 **Code**
 ```js
@@ -626,9 +613,8 @@ console.log("Welcome to Node JS".rainbow);
 <kbd><img src="Images/21-03-2019-NodeJS-Colors.PNG"></kbd>
 </p>
 
-#### `c) Create a user defined module named “Math” with four functions Addition, Subtraction, Multiplication, Division and export them. Import Math module form other Node JS Script file and invoke all the four functions to perform operations on given input.`
+`**User defined module “Math”**`
 
-**Answer**
 
 **Code**
 
@@ -669,10 +655,8 @@ Multiplication of 5 * 5 = 25
 Division of 5 / 5 = 1
 ```
 
-#### `d) Create a Node JS Script that displays a message “ Welcome to Node JS” through loop, with delay in between the iterations` 
-- `(i.) Using setTimeOut()`
+`**“Welcome to Node JS” through loop Using setTimeOut() with delay**`
 
-**Answer**
 
 **Code**
 ```js
@@ -694,93 +678,8 @@ Welcome to Node JS
 Welcome to Node JS 
 ```
 
-**[Back to TOC](#table-of-contents)**
+`**Get two files from command line and perform read and write with append**`
 
-### `Assignment 2:`
-
-#### `a) Create a NodeJS based script file, that provides implementation for ‘pwd’ command from ‘Node’ shell.`
-
-**Answer**
-
-**Code**
-```js
-console.log(process.cwd());
-```
-
-**Console Log**
-```console
-$ node app.js 
-/home/ubuntu/workspace/Node Learnings
-```
-
-#### `b) Create a NodeJS based script file, that reads the name of the directory from the command line arguments and displays the list of directory contents (using fs module)`
-
-**Answer**
-
-**Code**
-```js
-const fs = require('fs');
-const commandLineArg = process.argv[2];
-
-fs.readdir(commandLineArg, (err, files) => {
-    if (err) throw err;
-    console.log(`Contents of the ${commandLineArg} folder`);
-    files.forEach((file) => {
-        console.log(file);
-    });
-});
-```
-
-**Console Log**
-```console
-$ node app.js test
-Contents of the test folder
-bar.txt
-foo.html
-foobar.pdf
-```
-
-#### `c) Create a Node JS script that reads the file name from console and displays the contents of the file`
-- `i. Synchronous mode`
-- `ii. Asynchronous mode`
-
-**Answer**
-
-**Code**
-```js
-const fs = require('fs');
-const commandLineArg = process.argv[2];
-
-// Asynchronous Mode
-fs.readFile(commandLineArg, (err, data) => {
-    if(err) throw err;
-    console.log("\n Reading the file contents using Asynchronous Method \n");
-    console.log(data.toString());
-});
-
-// Synchronous Mode
-const data = fs.readFileSync(commandLineArg);
-console.log("Reading the file contents using Synchronous Method \n");
-console.log(data.toString());
-```
-
-**Console Log**
-```console
-$ node app.js bar.txt
-Reading the file contents using Synchronous Method 
-
-Project Name: Creating an Object Type
-Project Owner: Navin
-
-Reading the file contents using Asynchronous Method 
-
-Project Name: Creating an Object Type
-Project Owner: Navin
-```
-
-#### `d) Create a NodeJS based script file, that reads the names of the 2 files from the user (Use process module; On stdin “data” event by using call-back accept the input from the user) and reads the content of first file by using Read Stream API and writes in into second file by using Write Stream API. If second file is available it should append the content. If not it should create a new file and add the content to it.`
-
-**Answer**
 
 **File to be Read**
 
@@ -818,13 +717,8 @@ Therefore, if you write the code as cleverly as possible, you are, by definition
 
 ```
 
-**[Back to TOC](#table-of-contents)**
+`**User defined Data module**`
 
-### `Assignment 3 :`
-
-#### `a) Create a user defined date module that can give you the current date and time.`
-
-**Answer**
 
 **date.js**
 
@@ -838,9 +732,8 @@ module.exports = {
 }
 ```
 
-#### `b) Write a Node script file to display current Date & Time by using user defined date module.`
+`**Get the module to print the current Date**`
 
-**Answer**
 
 **app.js**
 
@@ -857,9 +750,8 @@ $ node app.js
 3/21/2019, 3:59:55 PM
 ```
 
-#### `c) Write a Node script file to find out how many seconds are there in a year. How many seconds are there in a century and writes the result into a file.`
+`**Seconds in a year and a decade**`
 
-**Answer**
 
 **Code**
 ```js
@@ -882,9 +774,8 @@ Seconds in a Year 31536000 seconds
 Seconds in a Decade 315360000 seconds
 ```
 
-#### `d) Create a daysTill custom module. It should be able to give you the number of days till Christmas and the number of days till mother’s day. number of days till your Birthday.(Hint : Subtract both the dates to get difference in no.of milliseconds)`
+`**daysTill user defined module**`
 
-**Answer**
 
 **User Defined Module Code**
 
@@ -923,15 +814,9 @@ $ node app.js
 255 Days till Birthday
 ```
 
-**[Back to TOC](#table-of-contents)**
 
-## `Topic 2: Node JS Modules:`
+`**Net module Client Server Socket Example**`
 
-### `Assignment 1:`
-
-#### `a) Create Server socket that listens at a port number 3000 and creates sockets for everyclient request and sends “Hello Client” message (Hint: Use net module)`
-
-**Answer**
 
 **server.js**
 ```js
@@ -955,9 +840,6 @@ server.listen(3000, 'localhost', () => {
 });
 ```
 
-#### `b) Send a request to server from browser(http://localhost:3000) & get the response`
-
-**Answer**
 
 **request log**
 ```console
@@ -977,9 +859,6 @@ A client connected at 127.0.0.1:52316
 A client at 127.0.0.1:52316 got disconnected
 ```
 
-#### `c) Create a client socket that sends request to the server along with a message “Hello Server”`
-
-**Answer**
 
 **client.js**
 ```js
@@ -1024,9 +903,6 @@ Hello Client
 Disconnected from the server
 ```
 
-#### `d) Test it through ‘telnet’, to see the message echo.`
-
-**Answer**
 
 **console log**
 ```console
@@ -1056,77 +932,8 @@ Please disconnect
 Connection closed by foreign host.
 ```
 
-**[Back to TOC](#table-of-contents)**
+`**Event Emitter Example**`
 
-### `Assignment 2:`
-
-#### `a) Create a simple HTTP server that responds to requests with a simple HTML response. (Hint : using http module)`
-
-**Answer**
-
-**Code**
-```js
-const http = require('http');
-
-const server = http.createServer((req, res) => {
-res.write("<h1>Hello World</h1>");
-res.write("<h2>HTML response from the server</h2>");
-res.write("<p>Created a simple HTTP server that responds to requests with a simple HTML response</p>");
-res.end();
-});
-
-server.listen(process.env.PORT, process.env.IP)
-```
-
-**Output**
-
-<p align="center">
-<kbd><img src="Images/22-03-2019-7-simple-http-server.PNG"></kbd>
-</p>
-
-#### `b) Create a Node JS Script, using ‘http’ module that downloads the content from a web page to a file E.g. to download the google home page`
-
-**Answer**
-
-**Code**
-```js
-const http = require('http');
-const fs = require('fs');
-
-const options = {
-host: "www.google.com",
-port: "80",
-path: "/"
-};
-
-const callback = (res) => {
-let body = '';
-res.on('data', (data) => {
-    body += data;
-});
-
-res.on('end', () => {
-    fs.writeFile('bar.html', body, 'utf-8', (err) => {
-    if(err) throw err;
-    });
-});
-};
-
-var req = http.request(options, callback);
-req.end();
-```
-
-**Output**
-
-**Formatted Downloaded Google Homepage**
-
-<p align="center">
-<kbd><img src="Images/22-03-2019-7-Google-HomePage-Download.PNG"></kbd>
-</p>
-
-#### `c) Write a Node JS script file to create & emit custom events one, two & three with messages “First Event” ,”Second Event” & “Third Event” by using Event Emitter class of Events module`
-
-**Answer**
 
 **Code**
 ```js
@@ -1159,13 +966,8 @@ Second Event
 Third Event
 ```
 
-**[Back to TOC](#table-of-contents)**
+`**MVC pattern HTML file rendering Example**`
 
-### `Assignment 3:`
-
-#### `a) Create a folder called views (there's nothing special about this folder name, it's just a common name for one part of a standard MVC pattern). In this folder make a file called index.html. Add some content to it.`
-
-**Answer**
 
 **Image Output**
 
@@ -1186,9 +988,6 @@ Third Event
     </body>
 </html>
 ```
-
-#### `b) Use fs.readFile to get hold of the about.html file. you can use __dirname to get the current directory. In the fs call back use response.write() to write the file contents to the response. Finally call response.end to send the index.html file content to the user.`
-- `(Note: call-backs are asynchronous, you don't know how long it will take to start reading the file, and Node will not wait. This means you will need to call response.end in the fs call back or the response will be returned before the file has been read.)`
 
 **Code**
 ```js
@@ -1213,11 +1012,7 @@ server.listen(process.env.PORT, process.env.IP);
 <kbd><img src="Images/22-03-2019-7-html-file-rendered-in-browser.PNG"></kbd>
 </p>
 
-**[Back to TOC](#table-of-contents)**
-
-
 <!--
-**Answer**
 
 **Node Script**
 ```js

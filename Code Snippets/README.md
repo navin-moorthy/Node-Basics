@@ -1,6 +1,6 @@
 # Code Snippets  :
 
-`**An Object type in Java Script and added functions & variables to it?**`
+### `**An Object type in Java Script and added functions & variables to it?**`
 
 
 **Code**
@@ -31,7 +31,7 @@ Project Description: 'project' is a simple object created to add variables and f
 Project Creation: 'project' was created on 18th March 2019
 ```
 
-`**Create array then add variables and function to it through push()**`
+### `**Create array then add variables and function to it through push()**`
 
 
 **Code**
@@ -86,7 +86,7 @@ Project Description: 'project1' is a simple object created to add variables and 
 Project Creation: 'project' was created on 18th March 2019
 ```
 
-`**Access the present Working directory**`
+### `**Access the present Working directory**`
 
 
 **Code**
@@ -100,7 +100,7 @@ console.log(process.cwd());
 /home/ubuntu/workspace/Node Learnings
 ```
 
-`**Reads the name of the directory  from the command line arguments and displays the list of directory contents (using fs module)**`
+### `**Reads the name of the directory  from the command line arguments and displays the list of directory contents (using fs module)**`
 
 
 **Code**
@@ -126,7 +126,7 @@ foo.html
 foobar.pdf
 ```
 
-`**Reads the file name from console and displays the contents of the file**`
+### `**Reads the file name from console and displays the contents of the file**`
 - `Synchronous mode`
 - `Asynchronous mode`
 
@@ -163,7 +163,7 @@ Project Name: Creating an Object Type
 Project Owner: Navin
 ```
 
-`**Displays a message through loop, with delay in between the iterations Using setTimeOut()**`
+### `**Displays a message through loop, with delay in between the iterations Using setTimeOut()**`
 
 
 **Code**
@@ -193,7 +193,7 @@ I am printed at 742ms
 I am printed at 837ms
 ```
 
-`**Using ‘http’ module Downloads the content from google home page to a file**`
+### `**Using ‘http’ module Downloads the content from google home page to a file**`
 
 
 **Code**
@@ -232,7 +232,7 @@ req.end();
 <kbd><img src="https://github.com/NavinNavi19/Node-Basics/blob/master/Code%20Snippets/Images/19-03-2019-7-Google-HomePage-Download.PNG"></kbd>
 </p>
 
-`**Create a HTTP server that responds to requests. (using http module)**`
+### `**Create a HTTP server that responds to requests. (using http module)**`
 
 
 **Code**
@@ -255,7 +255,7 @@ server.listen(process.env.PORT, process.env.IP)
 <kbd><img src="https://github.com/NavinNavi19/Node-Basics/blob/master/Code%20Snippets/Images/19-03-2019-7-simple-http-server.PNG"></kbd>
 </p>
 
-`**Chat Application using server and client sockets**`
+### `**Chat Application using server and client sockets**`
 
 
 **Code**
@@ -406,7 +406,7 @@ Socket : 54940 left the server
 Everyone has left the server
 ```
 
-`**Using ‘mongodb’ module read the data from a table in ‘mongodb’ database and display the details on console.**`
+### `**Using ‘mongodb’ module read the data from a table in ‘mongodb’ database and display the details on console.**`
 
 
 **Data to be read from the database**
@@ -454,7 +454,7 @@ Connected to the database
 { _id: 5c920fc86acbbdb5b39c41db, d: 4 } ]
 ```
 
-`**Uses ‘mongodb’ module perform ‘CRUD’ operations on a Collection of MongoDB database.**`
+### `**Uses ‘mongodb’ module perform ‘CRUD’ operations on a Collection of MongoDB database.**`
 
 
 **Code**
@@ -579,7 +579,7 @@ Deleted the 4th object from the collection list
 { _id: 5c9221be191e2f222f7fa085, user3: 'Access' } ]
 ```
 
-`**Hostname & Platform details(OS Module)**`
+### `**Hostname & Platform details(OS Module)**`
 
 
 **Code**
@@ -596,7 +596,7 @@ Hostname: navinnavi19-yelpcamp-6787935
 Platform: linux
 ```
 
-`**Displays “Hello” text in red color and “Welcome to Node JS” text in rainbow colors(Colors Module)**`
+### `**Displays “Hello” text in red color and “Welcome to Node JS” text in rainbow colors(Colors Module)**`
 
 
 **Code**
@@ -613,7 +613,7 @@ console.log("Welcome to Node JS".rainbow);
 <kbd><img src="Images/21-03-2019-NodeJS-Colors.PNG"></kbd>
 </p>
 
-`**User defined module “Math”**`
+### `**User defined module “Math”**`
 
 
 **Code**
@@ -655,7 +655,7 @@ Multiplication of 5 * 5 = 25
 Division of 5 / 5 = 1
 ```
 
-`**“Welcome to Node JS” through loop Using setTimeOut() with delay**`
+### `**“Welcome to Node JS” through loop Using setTimeOut() with delay**`
 
 
 **Code**
@@ -678,7 +678,7 @@ Welcome to Node JS
 Welcome to Node JS 
 ```
 
-`**Get two files from command line and perform read and write with append**`
+### `**Get two files from command line and perform read and write with append**`
 
 
 **File to be Read**
@@ -717,7 +717,7 @@ Therefore, if you write the code as cleverly as possible, you are, by definition
 
 ```
 
-`**User defined Data module**`
+### `**User defined Data module**`
 
 
 **date.js**
@@ -732,7 +732,7 @@ module.exports = {
 }
 ```
 
-`**Get the module to print the current Date**`
+### `**Get the module to print the current Date**`
 
 
 **app.js**
@@ -750,7 +750,7 @@ $ node app.js
 3/21/2019, 3:59:55 PM
 ```
 
-`**Seconds in a year and a decade**`
+### `**Seconds in a year and a decade**`
 
 
 **Code**
@@ -774,7 +774,7 @@ Seconds in a Year 31536000 seconds
 Seconds in a Decade 315360000 seconds
 ```
 
-`**daysTill user defined module**`
+### `**daysTill user defined module**`
 
 
 **User Defined Module Code**
@@ -815,7 +815,7 @@ $ node app.js
 ```
 
 
-`**Net module Client Server Socket Example**`
+### `**Net module Client Server Socket Example**`
 
 
 **server.js**
@@ -932,7 +932,7 @@ Please disconnect
 Connection closed by foreign host.
 ```
 
-`**Event Emitter Example**`
+### `**Event Emitter Example**`
 
 
 **Code**
@@ -966,7 +966,7 @@ Second Event
 Third Event
 ```
 
-`**MVC pattern HTML file rendering Example**`
+### `**MVC pattern HTML file rendering Example**`
 
 
 **Image Output**
